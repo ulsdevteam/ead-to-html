@@ -175,12 +175,12 @@
     <xsl:variable name="ItemAuthor" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:did/ead:origination/ead:persname)"/>
     <xsl:variable name="ItemCitation" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:prefercite/ead:p) "/>
     <xsl:variable name="ItemDate" select="normalize-space(ead:did/ead:unitdate)"/>
-    <xsl:variable name="ItemInfo1" select="normalize-space(ancestor::*[local-name()='c' and @level='series'][1]/ead:did/ead:unittitle)"/>
+    <xsl:variable name="ItemInfo1" select="normalize-space(ancestor::*[(local-name()='c' or local-name()='c01' or local-name()='c02' or local-name()='c03') and @level='series'][1]/ead:did/ead:unittitle)"/>
     <xsl:variable name="ItemInfo2"
 select="(ead:accessrestrict/ead:p|ancestor::*[local-name()='c' and @level='series'][1]/ead:accessrestrict/ead:p|/ead:ead/ead:archdesc[@level='collection']/ead:accessrestrict/ead:p)[1]"/>
     <xsl:variable name="ItemNumber" select="substring-before(substring-after(ead:did/ead:container[@type='box']/@label,'['), ']')"/>
     <xsl:variable name="ItemTitle" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:did/ead:unittitle)"/>
-    <xsl:variable name="ItemSubTitle" select="normalize-space(concat(parent::*/ead:did/ead:unittitle, ' , ',parent::*/ead:did/ead:unitid[not(@*)]))"/>
+    <xsl:variable name="ItemSubTitle" select="normalize-space(ead:did/ead:unittitle, ' , ', ead:did/ead:unitid[not(@*)]))"/>
     <xsl:variable name="ItemVolume" select="concat(ead:did/ead:container[not(@parent)]/@type,' ', ead:did/ead:container[not(@parent)])"/>
     <xsl:variable name="ItemIssue" select="concat(ead:did/ead:container[@parent]/@type,' ', ead:did/ead:container[@parent])"/>
     <xsl:variable name="readingroom_aeon">
