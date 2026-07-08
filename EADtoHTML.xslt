@@ -180,7 +180,7 @@
 select="(ead:accessrestrict/ead:p|ancestor::*[local-name()='c' and @level='series'][1]/ead:accessrestrict/ead:p|/ead:ead/ead:archdesc[@level='collection']/ead:accessrestrict/ead:p)[1]"/>
     <xsl:variable name="ItemNumber" select="substring-before(substring-after(ead:did/ead:container[@type='box']/@label,'['), ']')"/>
     <xsl:variable name="ItemTitle" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:did/ead:unittitle)"/>
-    <xsl:variable name="ItemSubTitle" select="normalize-space(ead:did/ead:unittitle, ' , ', ead:did/ead:unitid[not(@*)]))"/>
+    <xsl:variable name="ItemSubTitle" select="normalize-space(concat(ead:did/ead:unittitle, ' , ', ead:did/ead:unitid[not(@*)]))"/>
     <xsl:variable name="ItemVolume" select="concat(ead:did/ead:container[not(@parent)]/@type,' ', ead:did/ead:container[not(@parent)])"/>
     <xsl:variable name="ItemIssue" select="concat(ead:did/ead:container[@parent]/@type,' ', ead:did/ead:container[@parent])"/>
     <xsl:variable name="readingroom_aeon">
