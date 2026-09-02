@@ -52,7 +52,7 @@
 
 
   <xsl:template match="/">
-    <article class="ead">
+    <article class="ead v20260902">
       <!-- create a table of contents -->
       <xsl:variable name="toc_contents">
         <xsl:for-each select="//ead:archdesc/ead:dsc">
@@ -173,11 +173,19 @@
     <xsl:variable name="EADnumber" select="/ead:ead/ead:eadheader/ead:eadid"/>
     <xsl:variable name="Callnumber" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:did/ead:unitid[not(@*)])"/>
     <xsl:variable name="ItemAuthor" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:did/ead:origination/ead:persname)"/>
-    <xsl:variable name="ItemCitation" select="$element[@id]"/>
+    <xsl:variable name="ItemCitation" select="$element/@id"/>
     <xsl:variable name="ItemDate" select="normalize-space(ead:did/ead:unitdate)"/>
     <xsl:variable name="ItemInfo1" select="normalize-space(ancestor::*[(local-name()='c' or local-name()='c01' or local-name()='c02' or local-name()='c03') and @level='series'][1]/ead:did/ead:unittitle)"/>
-    <xsl:variable name="ItemInfo2"
-select="(ead:accessrestrict/ead:p|ancestor::*[local-name()='c' and @level='series'][1]/ead:accessrestrict/ead:p|/ead:ead/ead:archdesc[@level='collection']/ead:accessrestrict/ead:p)[1]"/>
+    <xsl:variable name="allAccessRestrictions">
+      <xsl:for-each select="ancestor-or-self::*/ead:accessrestrict">
+        <xsl:sort select="position()" order="descending" data-type="number"/>
+          <xsl:for-each select="ead:p">
+            <xsl:value-of select="normalize-space(.)"/>
+            <xsl:text> </xsl:text>
+          </xsl:for-each>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:variable name="ItemInfo2" select="substring(normalize-space($allAccessRestrictions), 1, 255)"/>
     <xsl:variable name="ItemNumber" select="substring-before(substring-after(ead:did/ead:container[@type='box']/@label,'['), ']')"/>
     <xsl:variable name="ItemTitle" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:did/ead:unittitle)"/>
     <xsl:variable name="ItemSubTitle" select="normalize-space(concat(ead:did/ead:unittitle, ' , ', ead:did/ead:unitid[not(@*)]))"/>
