@@ -173,7 +173,7 @@
     <xsl:variable name="EADnumber" select="/ead:ead/ead:eadheader/ead:eadid"/>
     <xsl:variable name="Callnumber" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:did/ead:unitid[not(@*)])"/>
     <xsl:variable name="ItemAuthor" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:did/ead:origination/ead:persname)"/>
-    <xsl:variable name="ItemCitation" select="normalize-space(/ead:ead/ead:archdesc[@level='collection']/ead:prefercite/ead:p) "/>
+    <xsl:variable name="ItemCitation" select="$element[@id]"/>
     <xsl:variable name="ItemDate" select="normalize-space(ead:did/ead:unitdate)"/>
     <xsl:variable name="ItemInfo1" select="normalize-space(ancestor::*[(local-name()='c' or local-name()='c01' or local-name()='c02' or local-name()='c03') and @level='series'][1]/ead:did/ead:unittitle)"/>
     <xsl:variable name="ItemInfo2"
