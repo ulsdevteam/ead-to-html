@@ -181,8 +181,8 @@
         <xsl:sort select="position()" order="descending" data-type="number"/>
           <xsl:for-each select="ead:p">
             <xsl:value-of select="normalize-space(.)"/>
+            <xsl:text> </xsl:text>
           </xsl:for-each>
-        <xsl:text> </xsl:text>
       </xsl:for-each>
     </xsl:variable>
     <xsl:variable name="ItemInfo2" select="substring(normalize-space($allAccessRestrictions), 1, 255)"/>
